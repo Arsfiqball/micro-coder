@@ -1,8 +1,10 @@
 #include "ucoder.h"
 
-#include <base64.h>
-#include <sha256.h>
+#include <Arduino.h>
 #include <uECC.h>
+
+#include "base64.h"
+#include "sha256.h"
 
 extern "C" {
 
@@ -67,10 +69,6 @@ void ucoderCreate(const char *privateKey, char *payload, char *jwt) {
     }
   }
 
-  ucoderCreate(privateKeyBytes, payload, jwt);
-}
-
-void ucoderCreate(uint8_t *privateKeyBytes, char *payload, char *jwt) {
   uint8_t *tokenPointer = (uint8_t *)jwt;
   memcpy(tokenPointer, joseHeaderBase64, strlen(joseHeaderBase64));
   tokenPointer += strlen(joseHeaderBase64);
